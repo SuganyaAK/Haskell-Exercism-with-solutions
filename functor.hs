@@ -38,8 +38,6 @@ sumDigits (x:ys)
     | toDigits x == [x] = x + sumDigits ys
     | (length $ toDigits x) >= 2 = sumDigits (toDigits x ++ ys)
 
-        -- sumDigits (toDigits x) 
-
 areaCircle :: IO()
 areaCircle = do
     let pi =3.14
@@ -55,6 +53,24 @@ volumeCyliner r h = areaCircle' r * h
 volumeGreaterThan42 :: Float-> Float -> Bool
 volumeGreaterThan42 r h = if ((volumeCyliner r h) >42) then True else False
 
+================================ Space Age ===================================
+Given an age in seconds, calculate how old someone would be on:
+
+Mercury: orbital period 0.2408467 Earth years
+Venus: orbital period 0.61519726 Earth years
+Earth: orbital period 1.0 Earth years, 365.25 Earth days, or 31557600 seconds
+Mars: orbital period 1.8808158 Earth years
+Jupiter: orbital period 11.862615 Earth years
+Saturn: orbital period 29.447498 Earth years
+Uranus: orbital period 84.016846 Earth years
+Neptune: orbital period 164.79132 Earth years
+So if you were told someone were 1,000,000,000 seconds old, you should be able to say that they're 31.69 Earth-years old.
+
+If you're wondering why Pluto didn't make the cut, go watch this YouTube video.
+Note: The actual length of one complete orbit of the Earth around the sun is closer to 365.256 days (1 sidereal year). 
+The Gregorian calendar has, on average, 365.2425 days. While not entirely accurate, 365.25 is the value used in this exercise. 
+See Year on Wikipedia for more ways to measure a year.
+================================================================================================
 data Planet = Mercury
             | Venus
             | Earth
@@ -64,7 +80,7 @@ data Planet = Mercury
             | Uranus
             | Neptune
     deriving Eq
-
+    
 ageOn :: Planet -> Float -> Float
 ageOn planet seconds =  
   let earthOrbitalPeriod = 31557600.0
@@ -81,30 +97,16 @@ ageOn planet seconds =
                         Just orbitalPeriods -> earthYears / orbitalPeriods
                         Nothing -> error "Unknown planet"
     in planetYears
+====================================== Pangram =====================================
+Your task is to figure out if a sentence is a pangram.
+
+A pangram is a sentence using every letter of the alphabet at least once. 
+It is case insensitive, so it doesn't matter if a letter is lower-case (e.g. k) or upper-case (e.g. K).
+
+For this exercise, a sentence is a pangram if it contains each of the 26 letters in the English alphabet.
+===================================================================================
 
 isPangram :: String -> Bool
 isPangram text = 
     let lowerCase = map toLower text
     in all ( `elem` lowerCase) ['a'..'z']
-
-{-
-maxConsumption :: IO ()
-maxConsumption = do
-    putStrLn "Enter the hourly consumption :"
-    consumption <- getLine
-    putStrLn "Enter hours of daily use : "
-    hours <- getLine
-    putStrLn "Enter max allowed consumption :"
-    maxAllowed <- getLine
-    let monthyConsumption = consumption* hours* 30
-     return (monthlyConsumption)
-        if (monthlyConsumption > maxAllowed ) 
-            then putStr ("Monthly consumption is bigger than maximum allowed")
-        else if (monthlyConsumption == maxAllowed ) 
-            then putStr ("Monthly consumption is equal to maximum allowed")
-        else (monthlyConsumption < maxAllowed ) 
-            then putStr ("Monthly consumption is smaller than maximum allowed")
-            -}
-
-lengthWithFoldl :: [Int] -> Int
-lengthWithFoldl xs = foldr (\_ n-> 1 + n) 0 xs
