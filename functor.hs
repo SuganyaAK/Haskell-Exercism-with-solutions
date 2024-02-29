@@ -53,6 +53,20 @@ volumeCyliner r h = areaCircle' r * h
 volumeGreaterThan42 :: Float-> Float -> Bool
 volumeGreaterThan42 r h = if ((volumeCyliner r h) >42) then True else False
 
+=================================== Leap Year ==============================
+A leap year (in the Gregorian calendar) occurs:
+
+In every year that is evenly divisible by 4.
+Unless the year is evenly divisible by 100, in which case it's only a leap year if the year is also evenly divisible by 400.
+==========================================================================================================
+
+isLeapYear :: Integer -> Bool
+isLeapYear year 
+    | year `mod` 4 == 0 && year `mod` 100 ==0 = year `mod` 400 == 0
+    | year `mod` 4 == 0 && year `mod` 100 /=0 =True
+    | otherwise = False
+
+    
 ================================ Space Age ===================================
 Given an age in seconds, calculate how old someone would be on:
 
